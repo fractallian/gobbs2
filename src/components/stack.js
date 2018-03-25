@@ -28,7 +28,10 @@ function collect(connect, monitor) {
 class Stack extends React.Component {
   static propTypes = {
     pieces: PropTypes.array,
-    index: PropTypes.number.isRequired
+    index: PropTypes.number.isRequired,
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    connectDropTarget: PropTypes.func.isRequired
   }
 
   pieces = () => {

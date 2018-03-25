@@ -3,5 +3,5 @@ export function movePiece(fromStackIndex, toStackIndex) {
     type: 'MOVE',
     fromStackIndex,
     toStackIndex
-  }
+  };
 }

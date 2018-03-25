@@ -1,8 +1,15 @@
 import _ from 'lodash';
 import React from 'react';
+import PropTypes from 'prop-types';
 import Stack from './stack';
 
 export default class Board extends React.PureComponent {
+  static propTypes = {
+    stacks: PropTypes.array.isRequired,
+    board: PropTypes.array.isRequired,
+    players: PropTypes.array.isRequired
+  }
+
   stacks = (stacks) => {
     return _.map(stacks, (index) => {
       const pieces = this.props.stacks[index];

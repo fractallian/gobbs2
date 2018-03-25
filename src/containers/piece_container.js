@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
       return state.currentTurn === ownProps.player;
     }
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

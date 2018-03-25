@@ -14,7 +14,7 @@ function _initialStacks(player) {
     return _addStack(_.map(_.range(0, 4), (size) => {
       return {size, player};
     }));
-  })
+  });
 }
 
 const initialState = {
@@ -30,22 +30,22 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case 'MOVE': {
-      const fromStack = [...state.stacks[action.fromStackIndex]];
-      const toStack = [...state.stacks[action.toStackIndex]];
-      toStack.push(fromStack.pop());
-      const stacks = [...state.stacks];
-      stacks[action.fromStackIndex] = fromStack;
-      stacks[action.toStackIndex] = toStack;
-      return {
-        ...state,
-        stacks,
-        currentTurn: Number(state.currentTurn === 0)
-      };
-    }
-    default: {
-      return state;
-    }
+  case 'MOVE': {
+    const fromStack = [...state.stacks[action.fromStackIndex]];
+    const toStack = [...state.stacks[action.toStackIndex]];
+    toStack.push(fromStack.pop());
+    const stacks = [...state.stacks];
+    stacks[action.fromStackIndex] = fromStack;
+    stacks[action.toStackIndex] = toStack;
+    return {
+      ...state,
+      stacks,
+      currentTurn: Number(state.currentTurn === 0)
+    };
+  }
+  default: {
+    return state;
+  }
   }
 }
 
