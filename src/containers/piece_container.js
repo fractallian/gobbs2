@@ -3,7 +3,12 @@ import {connect} from 'react-redux';
 import {movePiece} from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
-  return {...ownProps};
+  return {
+    ...ownProps,
+    canDrag: () => {
+      return state.currentTurn === ownProps.player;
+    }
+  };
 }
 
 const mapDispatchToProps = (dispatch) => {

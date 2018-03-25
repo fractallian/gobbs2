@@ -5,8 +5,11 @@ import {DragSource} from 'react-dnd';
 
 const pieceSource = {
   beginDrag(props) {
-    const {stackIndex, onMove} = props;
-    return {stackIndex, movePiece: onMove};
+    const {stackIndex, onMove, size} = props;
+    return {stackIndex, size, movePiece: onMove};
+  },
+  canDrag(props) {
+    return props.canDrag();
   }
 };
 

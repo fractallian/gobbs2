@@ -4,17 +4,24 @@ import PropTypes from 'prop-types';
 import {DropTarget} from 'react-dnd';
 import PieceContainer from '../containers/piece_container';
 
-const squareTarget = {
+const targetSpec = {
   drop(props, monitor) {
     const item = monitor.getItem();
     item.movePiece(item.stackIndex, props.index);
+  },
+  canDrop(props, monitor) {
+    if (props.index > 15) return false;
+    const item = monitor.getItem();
+    const topSize = _.get(_.last(props.pieces), 'size', -1);
+    return item.size > topSize;
   }
 };
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
   };
 }
 
@@ -52,4 +59,4 @@ class Stack extends React.Component {
   }
 }
 
-export default DropTarget('piece', squareTarget, collect)(Stack);
+export default DropTarget('piece', targetSpec, collect)(Stack);

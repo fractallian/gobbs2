@@ -24,7 +24,8 @@ const initialState = {
     });
   }),
   players: [_initialStacks(0), _initialStacks(1)],
-  stacks: _stacks
+  stacks: _stacks,
+  currentTurn: 0
 };
 
 function reducer(state = initialState, action) {
@@ -38,7 +39,8 @@ function reducer(state = initialState, action) {
       stacks[action.toStackIndex] = toStack;
       return {
         ...state,
-        stacks
+        stacks,
+        currentTurn: Number(state.currentTurn === 0)
       };
     }
     default: {
