@@ -10,10 +10,8 @@ const targetSpec = {
     item.movePiece(item.stackIndex, props.index);
   },
   canDrop(props, monitor) {
-    if (props.index > 15) return false;
     const item = monitor.getItem();
-    const topSize = _.get(_.last(props.pieces), 'size', -1);
-    return item.size > topSize;
+    return props.canMove(item.stackIndex);
   }
 };
 

@@ -1,5 +1,7 @@
 import _ from 'lodash';
 import {createStore} from 'redux';
+import Game from './game';
+import AI from './ai';
 
 const _stacks = [];
 
@@ -31,17 +33,12 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
   case 'MOVE': {
-    const fromStack = [...state.stacks[action.fromStackIndex]];
-    const toStack = [...state.stacks[action.toStackIndex]];
-    toStack.push(fromStack.pop());
-    const stacks = [...state.stacks];
-    stacks[action.fromStackIndex] = fromStack;
-    stacks[action.toStackIndex] = toStack;
-    return {
-      ...state,
-      stacks,
-      currentTurn: Number(state.currentTurn === 0)
-    };
+    let newState = Game.makeMove(state, action.fromStackIndex, action.toStackIndex);
+    if (state.currentTurn === 0) {
+      const move = AI.decideMove(newState);
+      newState = Game.makeMove(newState, move.fromStackIndex, move.toStackIndex);
+    }
+    return newState;
   }
   default: {
     return state;
@@ -53,5 +50,7 @@ const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
+
+AI.decideMove(store.getState());
 
 export default store;
