@@ -34,7 +34,7 @@ function reducer(state = initialState, action) {
   switch (action.type) {
   case 'MOVE': {
     let newState = Game.makeMove(state, action.fromStackIndex, action.toStackIndex);
-    if (state.currentTurn === 0) {
+    if (state.currentTurn === 0 && newState.winner === undefined) {
       const move = AI.decideMove(newState);
       newState = Game.makeMove(newState, move.fromStackIndex, move.toStackIndex);
     }
